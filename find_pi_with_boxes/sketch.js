@@ -1,19 +1,18 @@
 //  why does it even work?   https://www.youtube.com/watch?v=jsYwFizhncE
 
-// code is unfinished yet, it only works beautiful for first 3 digits
+// code works beautiful for first 5 digits, when we deal with big numbersthat magical clack sound becomes awful
+
+var number_of_digits = 0;
 
 var counter=0;
 
-var speed = 3;
-
+var timestep = 100;
 var wall_size = 10;
 
-var number_of_digits;
-
-var small_size = 70;
+var small_size = 100;
 
 var initial_small = 0;
-var initial_big = 0.7;
+var initial_big = 1/timestep;
 
 
 function preload () {
@@ -24,48 +23,59 @@ function preload () {
 
 
 function setup() {
-  slider = createSlider(1,3, 2, 1)
+  // slider = createSlider(1,3, 3, 1)
   
   
-  number_of_digits = slider.value();
+  // number_of_digits = slider.value();
   number_of_digits--;
  
   
-  createCanvas(800, 400);
+  createCanvas(800, 500);
   small_box = new Box(259, small_size, initial_small, [255,0,0]);
-  big_size = Math.cbrt(Math.pow(100, number_of_digits))*small_size;
+  // big_size = Math.cbrt(Math.pow(100, number_of_digits))*small_size/(log(number_of_digits)+1);
   
-  if (Math.cbrt(Math.pow(100,number_of_digits))*small_size > 200)
-  {
-  big_box = new Box(500, 200, initial_big,[0,255,0]);
+  // if (Math.cbrt(Math.pow(100,number_of_digits))*small_size > 300)
+  // {
+  // big_box = new Box(500, 350, initial_big,[0,255,0]);
+  // }
+  // else
+  // {
+  //     big_box = new Box(500, big_size, initial_big ,[0,255,0]);
+  // }
+  switch (number_of_digits+1) {
+    case 1: big_size = small_size; break;
+    case 2: big_size = small_size*1.4; break;
+    case 3: big_size = small_size*1.8; break;
+    case 4: big_size = small_size*2.3; break;
+    case 5: big_size = small_size*3; break;
+    default: big_size = small_size * 3.8; break;
   }
-  else
-  {
-      big_box = new Box(500, big_size, initial_big ,[0,255,0]);
-  }
-
-
+  
+  big_box = new Box(500, big_size, initial_big ,[0,255,0]);
+      
+  
   
 }
 function draw() {
   background(250);
-  frameRate(6524)
+  // frameRate(6524)
   textSize(28)
-  text('adjust number of digits by using slaider', 400,30)
+  text('adjust number of digits on 5th row', 400,30)
+  for (let j = 0; j<timestep; j++) {
   textAlign(CENTER)
   textSize(100)
   fill('magenta')
-  text(counter, width/2,140)
+  text(counter, width/2,120)
   
   
   collision = false;
   
   small_box.move();
-  small_box.display();
+  
   small_box.hit_the_wall();
  
   big_box.move();
-  big_box.display();
+  
   big_box.hit_the_wall();
   
   stroke('blue');
@@ -92,9 +102,9 @@ function draw() {
 
   }
   // print (small_box.speed)
-
-    
-
+  }
+  big_box.display();
+  small_box.display();
 }
 
 
