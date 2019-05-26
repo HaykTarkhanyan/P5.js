@@ -2,11 +2,12 @@
 
 // code works beautiful for first 5 digits, when we deal with big numbersthat magical clack sound becomes awful
 
-var number_of_digits = 0;
+var number_of_digits = 5;
 
 var counter=0;
+var place_to_count;
 
-var timestep = 100;
+var timestep = 500;
 var wall_size = 10;
 
 var small_size = 100;
@@ -23,8 +24,10 @@ function preload () {
 
 
 function setup() {
+  place_to_count = createDiv(counter);
+  place_to_count.style('font-size', '80pt')
+  place_to_count.style('green')
   // slider = createSlider(1,3, 3, 1)
-  
   
   // number_of_digits = slider.value();
   number_of_digits--;
@@ -59,13 +62,13 @@ function setup() {
 function draw() {
   background(250);
   // frameRate(6524)
-  textSize(28)
+  textSize(40)
   text('adjust number of digits on 5th row', 400,30)
   for (let j = 0; j<timestep; j++) {
   textAlign(CENTER)
-  textSize(100)
-  fill('magenta')
-  text(counter, width/2,120)
+//   textSize(100)
+//   fill('magenta')
+//   text(counter, width/2,120)
   
   
   collision = false;
@@ -105,7 +108,9 @@ function draw() {
   }
   big_box.display();
   small_box.display();
+  place_to_count.html(nf(counter,number_of_digits+1))
 }
+  
 
 
 class Box {
