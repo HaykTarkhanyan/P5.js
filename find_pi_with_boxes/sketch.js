@@ -2,12 +2,14 @@
 
 // code works beautiful for first 5 digits, when we deal with big numbersthat magical clack sound becomes awful
 
-var number_of_digits = 5;
+// my hardware resources don't allow me to run this for more digits but if you think your device is capable to do it increase number of timesteps on the 12th row
+
+var number_of_digits = 4;
 
 var counter=0;
 var place_to_count;
 
-var timestep = 500;
+var timestep = 200;
 var wall_size = 10;
 
 var small_size = 100;
@@ -33,7 +35,8 @@ function setup() {
   number_of_digits--;
  
   
-  createCanvas(800, 500);
+  createCanvas(1366, 568);
+  fullscreen(true)
   small_box = new Box(259, small_size, initial_small, [255,0,0]);
   // big_size = Math.cbrt(Math.pow(100, number_of_digits))*small_size/(log(number_of_digits)+1);
   
@@ -63,12 +66,12 @@ function draw() {
   background(250);
   // frameRate(6524)
   textSize(40)
-  text('adjust number of digits on 5th row', 400,30)
+  text('adjust number of digits on 7th row', width/2,30)
   for (let j = 0; j<timestep; j++) {
   textAlign(CENTER)
-//   textSize(100)
-//   fill('magenta')
-//   text(counter, width/2,120)
+  // textSize(200)
+  // fill('magenta')
+  // text(counter, width/2,120)
   
   
   collision = false;
@@ -145,6 +148,3 @@ class Box {
   
   
 }
-
-
-
