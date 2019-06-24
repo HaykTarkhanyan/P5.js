@@ -1,8 +1,9 @@
 // zoom out to 67%
-
+// you can add elements by clicking
+// longer click more elements added
 
 var con =[]
-var max_connections = 15
+var max_connections = 20
 var white_true = false
 
 
@@ -47,7 +48,7 @@ function draw() {
     }
   }
   
-  
+  add_element()
   
   if (frameCount % 250 == 0 && con.length<max_connections)
   {
@@ -126,6 +127,11 @@ class Connection {
   }
 }
 
-
-
+function add_element() {
+  if (mouseIsPressed) {
+    con.push(new Connection(mouseX, mouseY, random(10,100), [random(255),random(255),random(255)], random(-5,5), random(-5,5)))    
+  }
+  
+  
+}
  
